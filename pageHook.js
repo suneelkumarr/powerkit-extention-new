@@ -770,6 +770,7 @@
     try {
       var t = String(v || '').replace(/\s+/g, ' ').trim();
       if (!t || t.length > 40) return false;
+      // Check for canonical seal with or without "sent by" prefix, in any style (italic or normal)
       return /^(?:❤️|♥️|❤|〽️|📨)\s*(?:sent by\s+)?lovable$/i.test(t) ||
         /^(?:❤️|♥️|❤|〽️|📨)?\s*(?:enviado por (?:lovasiri|lovable)2?|gesendet von lovable)$/i.test(t);
     } catch (e) {
