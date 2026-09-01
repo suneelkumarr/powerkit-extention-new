@@ -1,0 +1,120 @@
+{
+    "manifest_version":  3,
+    "name":  "degitalservice",
+    "version":  "7.0",
+    "description":  "degitalservice - premium productivity tools for the Lovable editor.",
+    "permissions":  [
+                        "storage",
+                        "activeTab",
+                        "scripting",
+                        "tabs",
+                        "cookies",
+                        "alarms"
+                    ],
+    "host_permissions":  [
+                             "https://*.lovable.dev/*",
+                             "https://lovable.dev/*",
+                             "https://api.lovable.dev/*",
+                             "https://lovable-api.com/*",
+                             "https://lovable.powerkits.net/*",
+                             "https://lovable.powerkits.net/*",
+                             "https://api.openai.com/*",
+                             "https://generativelanguage.googleapis.com/*",
+                             "https://powerkit-extention.onrender.com/*"
+                         ],
+    "icons":  {
+                  "16":  "icons/icon16.png",
+                  "32":  "icons/icon32.png",
+                  "48":  "icons/icon48.png",
+                  "128":  "icons/icon128.png"
+              },
+    "action":  {
+
+               },
+    "background":  {
+                       "service_worker":  "background.js"
+                   },
+    "content_scripts":  [
+                            {
+                                "matches":  [
+                                                "https://*.lovable.dev/*",
+                                                "https://lovable.dev/*",
+                                                "https://api.lovable.dev/*"
+                                            ],
+                                "js":  [
+                                           "policy-bridge.js"
+                                       ],
+                                "run_at":  "document_start",
+                                "all_frames":  true
+                            },
+                            {
+                                "matches":  [
+                                                "https://*.lovable.dev/*",
+                                                "https://lovable.dev/*"
+                                            ],
+                                "js":  [
+                                           "drag-blocker.js"
+                                       ],
+                                "run_at":  "document_start",
+                                "world":  "MAIN"
+                            },
+                            {
+                                "matches":  [
+                                                "https://*.lovable.dev/*",
+                                                "https://lovable.dev/*",
+                                                "https://api.lovable.dev/*"
+                                            ],
+                                "js":  [
+                                           "pageHook.js"
+                                       ],
+                                "run_at":  "document_start",
+                                "world":  "MAIN",
+                                "all_frames":  true
+                            },
+                            {
+                                "matches":  [
+                                                "https://*.lovable.dev/*",
+                                                "https://lovable.dev/*",
+                                                "https://api.lovable.dev/*"
+                                            ],
+                                "js":  [
+                                           "hide-prompt-file.js"
+                                       ],
+                                "run_at":  "document_idle",
+                                "world":  "MAIN",
+                                "all_frames":  true
+                            },
+                            {
+                                "matches":  [
+                                                "https://*.lovable.dev/*",
+                                                "https://lovable.dev/*",
+                                                "https://api.lovable.dev/*"
+                                            ],
+                                "js":  [
+                                           "hwFingerprint.js",
+                                           "content.js"
+                                       ],
+                                "run_at":  "document_idle"
+                            }
+                        ],
+    "web_accessible_resources":  [
+                                     {
+                                         "resources":  [
+                                                           "payload.js",
+                                                           "i18n.js",
+                                                           "hide-prompt-file.js",
+                                                           "castle-v2.js",
+                                                           "hwFingerprint.js",
+                                                           "pageHook.js",
+                                                           "jszip.min.js",
+                                                           "floating.css",
+                                                           "icons/*.png"
+                                                       ],
+                                         "matches":  [
+                                                         "https://*.lovable.dev/*",
+                                                         "https://lovable.dev/*",
+                                                         "https://api.lovable.dev/*"
+                                                     ]
+                                     }
+                                 ]
+}
