@@ -4673,37 +4673,92 @@ form#chat-input.ql-native-active-form {
 [data-pk-seal="1"] {
   font-style: italic !important;
   font-family: inherit !important;
+  font-weight: 500 !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 8px !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
   color: inherit !important;
-  user-select: text !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  cursor: default !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  min-width: 100px !important;
 }
 
 [data-pk-seal-container="1"] {
   min-height: 36px !important;
-  min-width: 90px !important;
+  min-width: 100px !important;
+  width: auto !important;
   display: inline-flex !important;
   align-items: center !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
 }
 
-/* --- PowerKits: Timestamp on top & Clean Seal Bubble --- */
-[data-pk-top-time="1"] {
+/* --- PowerKits: Timestamp centered on top & Clean Seal Bubble --- */
+div.group:has(.pk-canonical-seal),
+div.group:has([data-pk-seal]),
+[data-message-id]:has(.pk-canonical-seal),
+[data-message-id]:has([data-pk-seal]),
+[data-role="user"]:has(.pk-canonical-seal),
+[data-role="user"]:has([data-pk-seal]) {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-end !important;
+  position: relative !important;
+  width: 100% !important;
 }
 
-[data-pk-toolbar="1"] {
-  order: 1 !important;
-  margin-bottom: 4px !important;
-  margin-top: 0 !important;
+div.group:has(.pk-canonical-seal) > div:last-child,
+div.group:has([data-pk-seal]) > div:last-child,
+[data-message-id]:has(.pk-canonical-seal) > div:last-child,
+[data-role="user"]:has(.pk-canonical-seal) > div:last-child {
+  order: -1 !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-bottom: 8px !important;
+  margin-top: 4px !important;
   font-size: 11px !important;
   opacity: 0.75 !important;
 }
 
-[data-pk-toolbar="1"] button {
+/* User seal card bubble styling matching Screenshot 2 */
+div.group:has(.pk-canonical-seal) .rounded-2xl:has(.pk-canonical-seal),
+[data-message-id]:has(.pk-canonical-seal) .rounded-2xl:has(.pk-canonical-seal),
+[data-role="user"]:has(.pk-canonical-seal) .rounded-2xl:has(.pk-canonical-seal) {
+  min-width: 120px !important;
+  width: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 14px !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Hide Copy & Edit buttons */
+div.group:has(.pk-canonical-seal) button:not([aria-label*="link" i]):not([aria-label*="Link" i]):not([title*="link" i]),
+div.group:has([data-pk-seal]) button:not([aria-label*="link" i]):not([aria-label*="Link" i]):not([title*="link" i]),
+[data-message-id]:has(.pk-canonical-seal) button:not([aria-label*="link" i]):not([aria-label*="Link" i]):not([title*="link" i]),
+[data-role="user"]:has(.pk-canonical-seal) button:not([aria-label*="link" i]):not([aria-label*="Link" i]):not([title*="link" i]) {
   display: none !important;
+}
+
+/* Position Link button 🔗 on bottom right under the bubble */
+div.group:has(.pk-canonical-seal) button[aria-label*="link" i],
+div.group:has(.pk-canonical-seal) button[aria-label*="Link" i],
+div.group:has(.pk-canonical-seal) button[title*="link" i],
+[data-message-id]:has(.pk-canonical-seal) button[aria-label*="link" i],
+[data-message-id]:has(.pk-canonical-seal) button[title*="link" i],
+[data-role="user"]:has(.pk-canonical-seal) button[aria-label*="link" i] {
+  display: inline-flex !important;
+  position: absolute !important;
+  bottom: -22px !important;
+  right: 0 !important;
 }

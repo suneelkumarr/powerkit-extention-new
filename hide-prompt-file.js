@@ -86,46 +86,6 @@
       }
       hits.forEach(hideChipFrom);
 
-      // Ensure timestamp is placed on top of ❤️ Lovable seal bubble
-      try {
-        var seals = root.querySelectorAll ? root.querySelectorAll('.pk-canonical-seal, [data-pk-seal]') : [];
-        for (var si = 0; si < seals.length; si++) {
-          var seal = seals[si];
-          if (seal.closest('#ql-floating, #ql-launcher, form, textarea, input, nav, header')) continue;
-          var row = seal.closest('div.group, [data-message-id], [data-role="user"], article') || seal.parentElement;
-          while (row && row.parentElement && row.parentElement !== document.body && !row.parentElement.querySelector('textarea, form#chat-input')) {
-            if (row.classList && row.classList.contains('group')) break;
-            if (row.parentElement.classList && row.parentElement.classList.contains('group')) {
-              row = row.parentElement;
-              break;
-            }
-            row = row.parentElement;
-          }
-          if (row && !row.dataset.pkTopTime) {
-            row.dataset.pkTopTime = '1';
-            row.style.setProperty('display', 'flex', 'important');
-            row.style.setProperty('flex-direction', 'column', 'important');
-            row.style.setProperty('align-items', 'flex-end', 'important');
-            var ch = row.children;
-            for (var c = 0; c < ch.length; c++) {
-              var child = ch[c];
-              if (child.contains(seal)) {
-                child.style.setProperty('order', '2', 'important');
-              } else if (child.querySelector('button, svg, time') || /(today at|yesterday at|\d{1,2}:\d{2})/i.test(child.textContent || '')) {
-                child.style.setProperty('order', '1', 'important');
-                child.style.setProperty('margin-bottom', '4px', 'important');
-                child.style.setProperty('margin-top', '0px', 'important');
-                child.dataset.pkToolbar = '1';
-                var btns = child.querySelectorAll('button');
-                for (var b = 0; b < btns.length; b++) {
-                  btns[b].style.setProperty('display', 'none', 'important');
-                }
-              }
-            }
-          }
-        }
-      } catch (_) {}
-
       if (root.querySelectorAll) {
         var all = root.querySelectorAll("*");
         for (var i = 0; i < all.length; i++) {
